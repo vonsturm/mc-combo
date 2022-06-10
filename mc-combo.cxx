@@ -25,14 +25,14 @@ using namespace args_reader;
 
 void usage() {
   std::cout << "\nMC combination of correlated and uncorrelated uncertainties\n\n";
-  std::cout << "Usage: ./eff-mc <options>\n\n";
+  std::cout << "Usage: ./mc-combo -d <ds.json> <options>\n\n";
   std::cout << "Options:\n\n";
   std::cout << "mandatory:\n\n";
-  std::cout << "  -d (--datasets) <file.json> : .json file containing datasets and values\n";
+  std::cout << "  -d (--datasets) <ds.json> : .json file containing datasets and values\n\n";
   std::cout << "optional:\n\n";
   std::cout << "  -h (--help)        : Print this user manual\n";
-  std::cout << "  -uu <m1s,p1s,both> : minus/plus 1sigma uncorr. uncertainty \n";
-  std::cout << "  -cu <m1s,p1s,both> : minus/plus 1sigma corr. uncertainty \n";
+  std::cout << "  -uu <m1s,p1s,both> : \u00B1 1\u03C3 uncorr. uncertainty \n";
+  std::cout << "  -cu <m1s,p1s,both> : \u00B1 1\u03C3 corr. uncertainty \n";
   std::cout << "  -o (--output)      : Save histograms to this file (default out.root)\n";
   std::cout << "  -v (--verbose)     : More output\n";
   std::cout << "  -s (--stat)        : statistics to generate (default 1e6)\n\n";

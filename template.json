@@ -2,25 +2,25 @@
   "enrBEGe" : {
     "GD61A" : {
       "value" : 500,
-      "corr" : { "m1s" : 100, "p1s" : 50 },
-      "uncorr" : { "m1s" : 20, "p1s" : 25 }
+      "corr" : { "m1s" : 510, "p1s" : 400 },
+      "uncorr" : { "m1s" : 520, "p1s" : 450 }
     },
     "GD91B" : {
       "value" : 503,
-      "corr" : { "m1s" : 110, "p1s" : 70 },
-      "uncorr" : { "m1s" : 30, "p1s" : 27 }
+      "corr" : { "m1s" : 513, "p1s" : 499 },
+      "uncorr" : { "m1s" : 530, "p1s" : 489 }
     }
   },
   "enrCoax" : {
     "RG1" : {
       "value" : 500,
-      "corr" : { "m1s" : 200, "p1s" : 100 },
-      "uncorr" : { "m1s" : 80, "p1s" : 10 }
+      "corr" : { "m1s" : 501, "p1s" : 490 },
+      "uncorr" : { "m1s" : 580, "p1s" : 480 }
     },
     "ANG1" : {
       "value" : 520,
-      "corr" : { "m1s" : 100, "p1s" : 50 },
-      "uncorr" : { "m1s" : 90, "p1s" : 100 }
+      "corr" : { "m1s" : 550, "p1s" : 450 },
+      "uncorr" : { "m1s" : 590, "p1s" : 400 }
     }
   }
 }
