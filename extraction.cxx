@@ -22,12 +22,12 @@ map<int,string> get_detmap(string phase, string det);
 
 int main( int argc, char* argv[] ) {
 
-  cout << "test1" << endl;
-
   // loop over ph2(enrBEGe,enrCoax) / ph2p(enrBEGe,enrCoax,invCoax)
   vector<string> v_p = {"ph2", "ph2p"};
   vector<string> v_d = {"enrBEGe", "enrCoax", "invCoax"};
   vector<string> v_s = {"central", "m1s-corr", "m1s-uncorr", "p1s-corr", "p1s-uncorr"};
+
+  string isotope = argv[1];
 
   for (auto phase : v_p) {
     cout << "Loop " << phase << endl;
@@ -38,7 +38,9 @@ int main( int argc, char* argv[] ) {
     for (auto stuff : v_s) {
       cout << "Loop " << stuff << endl;
 
-      string fname = phase + "/pdf-" + phase + "-Kr85-decay-start-" + stuff + ".root";
+      string fname;
+      if      (isotope == "Kr85") fname = phase + "/pdf-" + phase + "-Kr85-decay-start-" + stuff + ".root";
+      else if (isotope == "Ar36") fname = phase + "/pdf-" + phase + "-Ar36-" + stuff + ".root";
       TFile * f = new TFile(fname.c_str());
 
       for (auto ds : v_d) {
@@ -51,10 +53,12 @@ int main( int argc, char* argv[] ) {
 
           f->cd();
           TH1D* h = (TH1D*)gDirectory->Get(hname.c_str());
-          int cs = h->Integral(509,519) - h->Integral(504,509);
-          if      (stuff == "central")  j_kr85[ds][ch_det.second]["value"]       = cs;
-          else if (stuff == "m1s-corr") j_kr85[ds][ch_det.second]["corr"]["m1s"] = cs;
-          else if (stuff == "p1s-corr") j_kr85[ds][ch_det.second]["corr"]["p1s"] = cs;
+          int cs;
+          if      (isotope == "Kr85") cs = h->Integral(509,519) - h->Integral(504,509);
+          else if (isotope == "Ar36") cs = h->Integral(425,435) - h->Integral(420,425);
+          if      (stuff == "central")    j_kr85[ds][ch_det.second]["value"]       = cs;
+          else if (stuff == "m1s-corr")   j_kr85[ds][ch_det.second]["corr"]["m1s"] = cs;
+          else if (stuff == "p1s-corr")   j_kr85[ds][ch_det.second]["corr"]["p1s"] = cs;
           else if (stuff == "m1s-uncorr") j_kr85[ds][ch_det.second]["uncorr"]["m1s"] = cs;
           else if (stuff == "p1s-uncorr") j_kr85[ds][ch_det.second]["uncorr"]["p1s"] = cs;
           delete h;
@@ -64,7 +68,7 @@ int main( int argc, char* argv[] ) {
       f->Close();
     }
     // write all the stuff in the json file
-    ofstream j_out(phase + "_kr85.json");
+    ofstream j_out(phase + "_" + isotope + ".json");
     j_out << j_kr85.dump(4);
     j_out.close();
   }
